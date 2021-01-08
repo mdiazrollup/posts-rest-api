@@ -1,6 +1,4 @@
 const { validationResult } = require('express-validator');
-const fs = require('fs');
-const path = require('path');
 const io = require('../socket');
 const Post = require('../models/post');
 const User = require('../models/user');
@@ -173,7 +171,3 @@ exports.deletePost = async (req, res, next) => {
     }
 }
 
-const clearImage = filePath => {
-    filePath = path.join(__dirname, '..', filePath);
-    fs.unlink(filePath, err => console.log(err));
-}
