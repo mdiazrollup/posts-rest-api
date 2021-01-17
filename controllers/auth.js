@@ -51,13 +51,16 @@ exports.login = async (req, res, next) => {
         }
         const token = jwt.sign({ email: user.email, userId: user._id.toString() }, 'secret', { expiresIn: '1h' });
         res.status(200).json({ token: token, userId: user._id.toString() });
+        return;
     }
     catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
         }
         next(err);
+        return err;
     }
+
 };
 
 exports.getUserStatus = async (req, res, next) => {
